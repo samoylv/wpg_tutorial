@@ -1,9 +1,10 @@
 
+
 def get_beamline():
     import os
     import wpg
     from wpg import Beamline
-    from wpg.optical_elements import Aperture, Drift, CRL, Empty, Use_PP, Mirror_plane
+    from wpg.optical_elements import Aperture, Drift, CRL, Empty, Use_PP, Mirror_plane,Mirror_plane_2d 
     from wpg.wpg_uti_oe import show_transmission
 
     wpg_path = os.path.abspath(os.path.dirname(wpg.__file__))
@@ -32,13 +33,16 @@ def get_beamline():
 
     # Define mirror profile
     # Apply distortions.
-    mirrors_path = os.path.join(wpg_path, '..','samples', 'data_common')
+    mirrors_path = 'data_common'
+    # Define mirror profile
     hom1_wavefront_distortion = Mirror_plane(orient='x', 
                                              theta=theta_om, 
                                              length=om_mirror_length, 
                                              range_xy=om_clear_ap/aperture_x_to_y_ratio, 
-                                             filename=os.path.join(mirrors_path, 'mirror1.dat'), 
-                                             scale=1, delim=' ')
+                                             filename=os.path.join(
+                                             mirrors_path, 'mirror_j37002_1d.asc'), 
+                                             scale=0.5,
+                                             bPlot=True)
     print('HOM1 WF distortion'); show_transmission(hom1_wavefront_distortion);
 
     zoom = 1.2
