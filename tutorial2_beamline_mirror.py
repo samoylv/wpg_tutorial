@@ -41,7 +41,7 @@ def get_beamline():
                                              range_xy=om_clear_ap/aperture_x_to_y_ratio, 
                                              filename=os.path.join(
                                              mirrors_path, 'mirror_j37002_1d.asc'), 
-                                             scale=0.5,
+                                             scale=1.,
                                              bPlot=True)
     print('HOM1 WF distortion'); show_transmission(hom1_wavefront_distortion);
 
