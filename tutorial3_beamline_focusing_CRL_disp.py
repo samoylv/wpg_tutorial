@@ -3,7 +3,7 @@ def get_beamline(z):
     import os
     import wpg
     from wpg import Beamline
-    from wpg.optical_elements import Aperture, Drift, CRL, Empty, Use_PP, Mirror_plane
+    from wpg.optical_elements import Aperture, Drift, CRL, Empty, Use_PP, Mirror_plane, create_CRL_from_file
     from wpg.wpg_uti_oe import show_transmission
     import numpy as np
 
@@ -71,7 +71,7 @@ def get_beamline(z):
     crl_initial_photon_energy = 8.42e3  # [eV] ### OK ???
     crl_final_photon_energy = 8.44e3  # [eV]   ### OK ???
 
-    crl = create_CRL(data_path,
+    crl = create_CRL_from_file(data_path,
                      'opd_crl_n{:d}_r_{:d}_e_{:d}_{:d}ev'.format(crl_number_of_lenses,int(crl_curvature_radius*1e6),
                                                            int(crl_initial_photon_energy),int(crl_final_photon_energy)),
                      _foc_plane=crl_focussing_plane,
@@ -113,71 +113,3 @@ def get_beamline(z):
     bl0.append(crl_to_sample, Use_PP(semi_analytical_treatment=1))
 
     return bl0
-
-import sys
-if sys.version_info[0] ==3:
-    import pickle
-else:
-    import cPickle as pickle
-def _save_object(obj, file_name):
-    """
-    Save any python object to file.
-    
-    :param: obj : - python objest to be saved
-    :param: file_name : - output file, wil be overwrite if exists
-    """
-    with open(file_name,'wb') as f:
-        pickle.dump(obj, f)
-
-def _load_object(file_name):
-    """
-    Save any python object to file.
-    
-    :param: file_name : - output file, wil be overwrite if exists
-    :return: obj : - loaded pthon object
-    """
-    res = None
-    with open(file_name,'rb') as f:
-        res = pickle.load(f)
-        
-    return res
-
-def create_CRL(directory,file_name,**args):
-    """
-    This function build CLR or load it from file.
-    Out/input filename builded as sequence of function parameters.
-    Adiitinal parameters (*args) passed to srwlib.srwl_opt_setup_CRL function
-    
-    :param directory: output directory
-    :param file_name: CRL file name
-    :return: SRWL CRL object
-    """
-        
-    import os
-    from wpg.optical_elements import CRL
-
-    full_path = os.path.join(directory, file_name+'.pkl')
-    
-    if  os.path.isfile(full_path):
-        print('Found file {}. CLR will be loaded from file'.format(full_path))
-        res = _load_object(full_path)
-        return res
-    else:
-        print('CLR file NOT found. CLR will be recalculated and saved in file {}'.format(full_path))
-        #res = srwl_opt_setup_CRL(*args)
-        #print('{:s},{:s},{:s},{:s},{:s},{:s},{:s},{:s},{:s},{:s},{:s},{:s},{:s}'.format(*args))
-        res = CRL(**args)
-        mkdir_p(os.path.dirname(full_path))
-        _save_object(res, full_path)
-        return res 
-
-def mkdir_p(path):
-    import os
-    import errno
-    try:
-        os.makedirs(path)
-    except OSError as exc:  # Python >2.5
-        if exc.errno == errno.EEXIST and os.path.isdir(path):
-            pass
-        else:
-            raise
