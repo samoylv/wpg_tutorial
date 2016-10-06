@@ -1,5 +1,5 @@
 
-def get_beamline(z):
+def get_beamline(z=None):
     import os
     import wpg
     from wpg import Beamline
@@ -18,6 +18,8 @@ def get_beamline(z):
     src_to_hom2 = 267.8  # Distance source to HOM 2 [m]
     src_to_crl = 887.8   # Distance source to CRL [m]
     src_to_exp = 920.803  #920.42 # Distance source to experiment [m]
+    if(z==None):
+        z = 0
     
     theta_om = 3.6e-3  # [rad]
 
