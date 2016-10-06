@@ -7,6 +7,8 @@ See WPG installation details for [Linux](http://wpg.readthedocs.io/en/latest/wpg
 
 For running the examples you would need [XPD FEL pulses data](https://in.xfel.eu/xpd/). With MS Windows installation it could be a problem with downloading data from the script. In this case you have to download [zip-file](https://in.xfel.eu/xpd/output/2016/10/57f354b36aa81/s1_8_43_100_xy75_ss14_nzc15_hdf5.zip) and unzip it into *data_wpg_tutorial_01* subfolder. 
 
+You can find some completed XPD requests for simulated [hard](https://in.xfel.eu/xpd/57f354b36aa81) and [soft](https://in.xfel.eu/xpd/57f3e79e925bb) SASE X-ray FEL pulses and for [FLASH source](https://in.xfel.eu/xpd/57f5182e2d9cc) 
+
 For visualization and browsing HDF5 files you can download [HDFVeiw tool](https://support.hdfgroup.org/products/java/hdfview/).
 
 Further information: 
