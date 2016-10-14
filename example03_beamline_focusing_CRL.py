@@ -7,7 +7,7 @@ def get_beamline(z=None):
     from wpg.wpg_uti_oe import show_transmission
 
     wpg_path = os.path.abspath(os.path.dirname(wpg.__file__))
-    data_path = 'data_wpg_tutorial_03'
+    data_path = 'data_example_03'
     data_common_path = 'data_common'
     bPrint = True
 

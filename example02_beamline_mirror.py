@@ -8,7 +8,7 @@ def get_beamline():
     from wpg.wpg_uti_oe import show_transmission
 
     wpg_path = os.path.abspath(os.path.dirname(wpg.__file__))
-    data_path = 'data_wpg_tutorial_02'
+    data_path = 'data_example_02'
 
     # S1 beamline layout
     # Geometry ###
