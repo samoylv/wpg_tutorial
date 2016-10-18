@@ -8,7 +8,7 @@ def get_beamline(z=None):
     import numpy as np
 
     wpg_path = os.path.abspath(os.path.dirname(wpg.__file__))
-    data_path = 'data_wpg_tutorial_03'
+    data_path = 'data_example_03'
     data_common_path = 'data_common'
     bPrint = False
 
